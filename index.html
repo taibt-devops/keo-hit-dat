@@ -329,6 +329,124 @@
   }
   .comments .hint b { color: var(--bone); font-weight: 600; }
 
+  .cform .crow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .cform input, .cform textarea {
+    width: 100%;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--bone);
+    background: rgba(0, 0, 0, .5);
+    border: 1px solid rgba(232, 221, 202, .22);
+    border-radius: 6px;
+    padding: 12px 14px;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .cform input::placeholder, .cform textarea::placeholder { color: rgba(155, 143, 146, .8); }
+  .cform input:focus, .cform textarea:focus {
+    border-color: var(--blood);
+    box-shadow: 0 0 14px rgba(217, 24, 32, .35);
+  }
+  .cform textarea { margin-top: 12px; resize: vertical; min-height: 84px; }
+  .cactions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+  .cnote { font-size: 13px; color: var(--gold); font-weight: 600; min-height: 1em; }
+  .cnote.err { color: #ff6b71; }
+  #csend {
+    font-family: "Anton", Impact, sans-serif;
+    font-size: 15px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #fff;
+    background: linear-gradient(180deg, #ff4b52, var(--gore));
+    border: 1px solid rgba(255, 75, 82, .6);
+    border-radius: 4px;
+    padding: 12px 28px;
+    cursor: pointer;
+    transform: skewX(-6deg);
+    box-shadow: 0 0 20px rgba(217, 24, 32, .35);
+    transition: filter .15s, box-shadow .15s;
+  }
+  #csend:hover { filter: brightness(1.15); box-shadow: 0 0 30px rgba(217, 24, 32, .6); }
+  #csend:focus-visible { outline: 2px solid var(--bone); outline-offset: 2px; }
+  #csend:disabled { opacity: .45; cursor: wait; }
+
+  .clist { margin-top: 34px; display: flex; flex-direction: column; gap: 14px; }
+  .cempty {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ash);
+    padding: 18px 0 4px;
+  }
+  .cmt {
+    display: flex;
+    gap: 14px;
+    text-align: left;
+    background: rgba(255, 255, 255, .03);
+    border: 1px solid rgba(232, 221, 202, .08);
+    border-left: 3px solid var(--gore);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .cmt.pending { opacity: .55; border-left-color: var(--gold); }
+  .cmt .cav {
+    flex: 0 0 auto;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-family: "Anton", Impact, sans-serif;
+    font-size: 19px;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .5);
+  }
+  .cmt .cmain { min-width: 0; flex: 1; }
+  .cmt .chead { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .cmt .cwho { font-size: 14px; font-weight: 800; color: var(--bone); }
+  .cmt .cbadge {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(255, 197, 61, .5);
+    border-radius: 999px;
+    padding: 2px 8px;
+  }
+  .cmt .cwhen { font-size: 11px; font-weight: 300; color: var(--ash); }
+  .cmt .cbody {
+    margin-top: 6px;
+    font-size: 14.5px;
+    font-weight: 300;
+    line-height: 1.55;
+    color: rgba(232, 221, 202, .92);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  .creplies { margin-top: 12px; display: flex; flex-direction: column; gap: 10px; }
+  .creplies .cmt { background: rgba(255, 255, 255, .02); padding: 10px 12px; }
+  .creplies .cav { width: 32px; height: 32px; font-size: 15px; }
+  .cfoot { margin-top: 22px; text-align: center; font-size: 11px; font-weight: 300; }
+  .cfoot a { color: rgba(155, 143, 146, .6); text-decoration: none; }
+  .cfoot a:hover { color: var(--ash); text-decoration: underline; }
+
+  @media (max-width: 560px) {
+    .cform .crow { grid-template-columns: 1fr; }
+  }
+
   /* ---------- hết giờ ---------- */
   .timeup { display: none; }
   body.is-timeup .count, body.is-timeup .deadline { display: none; }
@@ -472,18 +590,139 @@
   <section class="comments fade d5">
     <h2>🗣️ Khu cà khịa</h2>
     <p class="hint">Đặt cửa đi anh em — ai <b>kèo trên</b>, ai <b>kèo dưới</b>? Gõ tên rồi chém, <b>không cần đăng nhập</b>.</p>
-    <div id="cusdis_thread"
-      data-host="https://cusdis.com"
-      data-app-id="7d3a3037-abcf-4a06-ad9a-0d722f2cb31c"
-      data-page-id="keo-hit-dat"
-      data-page-url="https://taibt-devops.github.io/keo-hit-dat/"
-      data-page-title="Đấu trường hít đất - TrungGD vs TaiDevops"
-      data-theme="dark"
-    ></div>
+
+    <form id="cform" class="cform">
+      <div class="crow">
+        <input id="cname" type="text" maxlength="40" placeholder="Danh xưng chiến binh *" autocomplete="nickname">
+        <input id="cmail" type="email" maxlength="80" placeholder="Email (không bắt buộc)" autocomplete="email">
+      </div>
+      <textarea id="ctext" maxlength="1000" placeholder="Chém gió, đặt cửa, khích tướng… 🩸"></textarea>
+      <div class="cactions">
+        <span class="cnote" id="cnote"></span>
+        <button type="submit" id="csend">⚔️ Chém phát</button>
+      </div>
+    </form>
+
+    <div id="clist" class="clist" aria-live="polite"></div>
+    <div class="cfoot"><a href="https://cusdis.com" target="_blank" rel="noopener">bình luận chạy trên Cusdis</a></div>
   </section>
 </main>
 
-<script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+<script>
+(function () {
+  var C = {
+    host: 'https://cusdis.com',
+    appId: '7d3a3037-abcf-4a06-ad9a-0d722f2cb31c',
+    pageId: 'keo-hit-dat',
+    pageUrl: 'https://taibt-devops.github.io/keo-hit-dat/',
+    pageTitle: 'Đấu trường hít đất - TrungGD vs TaiDevops'
+  };
+  var AV_COLORS = ['#d91820', '#2d7dff', '#c78a12', '#7c4dff', '#009a6e', '#e05a00'];
+
+  var list = document.getElementById('clist');
+  var form = document.getElementById('cform');
+  var note = document.getElementById('cnote');
+  var send = document.getElementById('csend');
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch];
+    });
+  }
+
+  function avColor(name) {
+    var h = 0;
+    for (var i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) >>> 0;
+    return AV_COLORS[h % AV_COLORS.length];
+  }
+
+  function timeAgo(iso) {
+    var s = Math.max(1, Math.floor((Date.now() - new Date(iso)) / 1000));
+    if (s < 60) return 'vừa xong';
+    if (s < 3600) return Math.floor(s / 60) + ' phút trước';
+    if (s < 86400) return Math.floor(s / 3600) + ' giờ trước';
+    if (s < 2592000) return Math.floor(s / 86400) + ' ngày trước';
+    var d = new Date(iso);
+    return d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
+  }
+
+  function cmtHTML(c, pending) {
+    var name = c.by_nickname || (c.moderator && c.moderator.displayName) || 'Ẩn danh';
+    var badge = c.moderatorId ? '<span class="cbadge">Trọng tài</span>' : '';
+    var tag = pending ? '<span class="cbadge">Chờ duyệt</span>' : '';
+    var initial = name.trim().charAt(0).toUpperCase() || '?';
+    var html = '<div class="cmt' + (pending ? ' pending' : '') + '">' +
+      '<div class="cav" style="background:' + avColor(name) + '">' + esc(initial) + '</div>' +
+      '<div class="cmain"><div class="chead"><span class="cwho">' + esc(name) + '</span>' + badge + tag +
+      '<span class="cwhen">' + (pending ? 'vừa gửi' : esc(timeAgo(c.createdAt))) + '</span></div>' +
+      '<div class="cbody">' + esc(c.content) + '</div>';
+    var replies = c.replies && c.replies.data;
+    if (replies && replies.length) {
+      html += '<div class="creplies">';
+      for (var i = 0; i < replies.length; i++) html += cmtHTML(replies[i], false);
+      html += '</div>';
+    }
+    return html + '</div></div>';
+  }
+
+  function load() {
+    fetch(C.host + '/api/open/comments?appId=' + C.appId + '&pageId=' + C.pageId + '&page=1&pageSize=50')
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        var items = (res.data && res.data.data) || [];
+        if (!items.length) {
+          list.innerHTML = '<p class="cempty">Chưa ai dám mở miệng… làm phát comment đầu tiên đi 😏</p>';
+          return;
+        }
+        var html = '';
+        for (var i = 0; i < items.length; i++) html += cmtHTML(items[i], false);
+        list.innerHTML = html;
+      })
+      .catch(function () {
+        list.innerHTML = '<p class="cempty">Không tải được bình luận — tải lại trang thử nhé.</p>';
+      });
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = document.getElementById('cname').value.trim();
+    var mail = document.getElementById('cmail').value.trim();
+    var text = document.getElementById('ctext').value.trim();
+    note.classList.remove('err');
+    if (!name || !text) {
+      note.classList.add('err');
+      note.textContent = 'Điền danh xưng với nội dung đã chiến hữu ơi!';
+      return;
+    }
+    send.disabled = true;
+    note.textContent = 'Đang gửi…';
+    fetch(C.host + '/api/open/comments', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        appId: C.appId, pageId: C.pageId, content: text,
+        nickname: name, email: mail || undefined,
+        pageUrl: C.pageUrl, pageTitle: C.pageTitle
+      })
+    })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function () {
+        var empty = list.querySelector('.cempty');
+        if (empty) empty.remove();
+        list.insertAdjacentHTML('afterbegin', cmtHTML({ by_nickname: name, content: text }, true));
+        document.getElementById('ctext').value = '';
+        note.textContent = '🩸 Đã gửi! Trọng tài duyệt phát là lên sóng.';
+      })
+      .catch(function () {
+        note.classList.add('err');
+        note.textContent = 'Gửi không được — thử lại phát nữa xem.';
+      })
+      .then(function () { send.disabled = false; });
+  });
+
+  load();
+})();
+</script>
 
 <script>
 (function () {
