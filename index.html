@@ -329,11 +329,7 @@
   }
   .comments .hint b { color: var(--bone); font-weight: 600; }
 
-  .cform .crow {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
+  .cform .crow { display: grid; grid-template-columns: 1fr; }
   .cform input, .cform textarea {
     width: 100%;
     font-family: inherit;
@@ -439,7 +435,7 @@
   .creplies { margin-top: 12px; display: flex; flex-direction: column; gap: 10px; }
   .creplies .cmt { background: rgba(255, 255, 255, .02); padding: 10px 12px; }
   .creplies .cav { width: 32px; height: 32px; font-size: 15px; }
-  .cfoot { margin-top: 22px; text-align: center; font-size: 11px; font-weight: 300; }
+  .cfoot { margin-top: 22px; text-align: center; font-size: 11px; font-weight: 300; color: rgba(155, 143, 146, .6); }
   .cfoot a { color: rgba(155, 143, 146, .6); text-decoration: none; }
   .cfoot a:hover { color: var(--ash); text-decoration: underline; }
 
@@ -594,7 +590,6 @@
     <form id="cform" class="cform">
       <div class="crow">
         <input id="cname" type="text" maxlength="40" placeholder="Danh xưng chiến binh *" autocomplete="nickname">
-        <input id="cmail" type="email" maxlength="80" placeholder="Email (không bắt buộc)" autocomplete="email">
       </div>
       <textarea id="ctext" maxlength="1000" placeholder="Chém gió, đặt cửa, khích tướng… 🩸"></textarea>
       <div class="cactions">
@@ -604,19 +599,14 @@
     </form>
 
     <div id="clist" class="clist" aria-live="polite"></div>
-    <div class="cfoot"><a href="https://cusdis.com" target="_blank" rel="noopener">bình luận chạy trên Cusdis</a></div>
+    <div class="cfoot">bình luận nhà trồng 🌱 hiện tức thì — chém có văn hóa nhé</div>
   </section>
 </main>
 
 <script>
 (function () {
-  var C = {
-    host: 'https://cusdis.com',
-    appId: '7d3a3037-abcf-4a06-ad9a-0d722f2cb31c',
-    pageId: 'keo-hit-dat',
-    pageUrl: 'https://taibt-devops.github.io/keo-hit-dat/',
-    pageTitle: 'Đấu trường hít đất - TrungGD vs TaiDevops'
-  };
+  var API = 'https://famous-heron-6635.taibt-devops.deno.net';
+  var PAGE = 'keo-hit-dat';
   var AV_COLORS = ['#d91820', '#2d7dff', '#c78a12', '#7c4dff', '#009a6e', '#e05a00'];
 
   var list = document.getElementById('clist');
@@ -646,36 +636,27 @@
     return d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
   }
 
-  function cmtHTML(c, pending) {
-    var name = c.by_nickname || (c.moderator && c.moderator.displayName) || 'Ẩn danh';
-    var badge = c.moderatorId ? '<span class="cbadge">Trọng tài</span>' : '';
-    var tag = pending ? '<span class="cbadge">Chờ duyệt</span>' : '';
+  function cmtHTML(c) {
+    var name = c.nickname || 'Ẩn danh';
     var initial = name.trim().charAt(0).toUpperCase() || '?';
-    var html = '<div class="cmt' + (pending ? ' pending' : '') + '">' +
+    return '<div class="cmt">' +
       '<div class="cav" style="background:' + avColor(name) + '">' + esc(initial) + '</div>' +
-      '<div class="cmain"><div class="chead"><span class="cwho">' + esc(name) + '</span>' + badge + tag +
-      '<span class="cwhen">' + (pending ? 'vừa gửi' : esc(timeAgo(c.createdAt))) + '</span></div>' +
-      '<div class="cbody">' + esc(c.content) + '</div>';
-    var replies = c.replies && c.replies.data;
-    if (replies && replies.length) {
-      html += '<div class="creplies">';
-      for (var i = 0; i < replies.length; i++) html += cmtHTML(replies[i], false);
-      html += '</div>';
-    }
-    return html + '</div></div>';
+      '<div class="cmain"><div class="chead"><span class="cwho">' + esc(name) + '</span>' +
+      '<span class="cwhen">' + esc(timeAgo(c.createdAt)) + '</span></div>' +
+      '<div class="cbody">' + esc(c.content) + '</div></div></div>';
   }
 
   function load() {
-    fetch(C.host + '/api/open/comments?appId=' + C.appId + '&pageId=' + C.pageId + '&page=1&pageSize=50')
+    fetch(API + '/comments?page=' + PAGE)
       .then(function (r) { return r.json(); })
       .then(function (res) {
-        var items = (res.data && res.data.data) || [];
+        var items = res.data || [];
         if (!items.length) {
           list.innerHTML = '<p class="cempty">Chưa ai dám mở miệng… làm phát comment đầu tiên đi 😏</p>';
           return;
         }
         var html = '';
-        for (var i = 0; i < items.length; i++) html += cmtHTML(items[i], false);
+        for (var i = 0; i < items.length; i++) html += cmtHTML(items[i]);
         list.innerHTML = html;
       })
       .catch(function () {
@@ -686,7 +667,6 @@
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var name = document.getElementById('cname').value.trim();
-    var mail = document.getElementById('cmail').value.trim();
     var text = document.getElementById('ctext').value.trim();
     note.classList.remove('err');
     if (!name || !text) {
@@ -696,26 +676,23 @@
     }
     send.disabled = true;
     note.textContent = 'Đang gửi…';
-    fetch(C.host + '/api/open/comments', {
+    fetch(API + '/comments', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        appId: C.appId, pageId: C.pageId, content: text,
-        nickname: name, email: mail || undefined,
-        pageUrl: C.pageUrl, pageTitle: C.pageTitle
-      })
+      body: JSON.stringify({ page: PAGE, nickname: name, content: text })
     })
-      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(function () {
+      .then(function (r) { return r.json().then(function (res) { return { ok: r.ok, res: res }; }); })
+      .then(function (out) {
+        if (!out.ok) throw new Error((out.res && out.res.error) || 'loi');
         var empty = list.querySelector('.cempty');
         if (empty) empty.remove();
-        list.insertAdjacentHTML('afterbegin', cmtHTML({ by_nickname: name, content: text }, true));
+        list.insertAdjacentHTML('afterbegin', cmtHTML(out.res.data));
         document.getElementById('ctext').value = '';
-        note.textContent = '🩸 Đã gửi! Trọng tài duyệt phát là lên sóng.';
+        note.textContent = '🩸 Lên sóng luôn rồi đó!';
       })
-      .catch(function () {
+      .catch(function (err) {
         note.classList.add('err');
-        note.textContent = 'Gửi không được — thử lại phát nữa xem.';
+        note.textContent = (err && err.message && err.message !== 'loi') ? err.message : 'Gửi không được — thử lại phát nữa xem.';
       })
       .then(function () { send.disabled = false; });
   });
