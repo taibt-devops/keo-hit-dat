@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kèo hít đất · TrungGD vs TaiDevops 💪</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ring:   #0e0e14;
+    --red:    #ff3b47;
+    --blue:   #2d7dff;
+    --gold:   #ffc53d;
+    --chalk:  #f5f0e6;
+    --smoke:  #8b8b9e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body { height: 100%; }
+
+  body {
+    font-family: "Be Vietnam Pro", "Segoe UI", system-ui, sans-serif;
+    color: var(--chalk);
+    background:
+      radial-gradient(60% 80% at 0% 0%,   rgba(255, 59, 71, .28), transparent 60%),
+      radial-gradient(60% 80% at 100% 100%, rgba(45, 125, 255, .28), transparent 60%),
+      radial-gradient(90% 60% at 50% 120%, #16161f 0%, transparent 70%),
+      var(--ring);
+    min-height: 100%;
+    overflow-x: hidden;
+    display: grid;
+    place-items: center;
+  }
+
+  /* ---------- ánh đèn sàn đấu ---------- */
+  .spot {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+      conic-gradient(from 200deg at 18% -10%, transparent 0deg, rgba(255, 255, 255, .05) 12deg, transparent 26deg),
+      conic-gradient(from 140deg at 82% -10%, transparent 0deg, rgba(255, 255, 255, .05) 12deg, transparent 26deg);
+  }
+
+  main {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 44px 18px 52px;
+    max-width: 900px;
+    width: 100%;
+  }
+
+  .fade { opacity: 0; transform: translateY(16px); animation: rise .8s ease forwards; }
+  .d1 { animation-delay: .05s; }
+  .d2 { animation-delay: .25s; }
+  .d3 { animation-delay: .45s; }
+  .d4 { animation-delay: .65s; }
+  .d5 { animation-delay: .85s; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .38em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(255, 197, 61, .45);
+    padding: 8px 18px 7px 22px;
+    border-radius: 999px;
+  }
+
+  /* ---------- hai võ sĩ ---------- */
+  .versus {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(10px, 3vw, 28px);
+    flex-wrap: wrap;
+  }
+  .fighter {
+    font-family: "Anton", "Archivo Black", Impact, sans-serif;
+    font-size: clamp(34px, 7.5vw, 84px);
+    line-height: 1;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+  }
+  .fighter.red  { color: var(--red);  text-shadow: 0 0 34px rgba(255, 59, 71, .45); }
+  .fighter.blue { color: var(--blue); text-shadow: 0 0 34px rgba(45, 125, 255, .5); }
+  .fighter small {
+    display: block;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: clamp(10px, 1.4vw, 13px);
+    font-weight: 600;
+    letter-spacing: .3em;
+    margin-top: 8px;
+    color: var(--smoke);
+  }
+  .vs {
+    font-family: "Anton", "Archivo Black", Impact, sans-serif;
+    font-size: clamp(22px, 4vw, 44px);
+    color: var(--gold);
+    text-shadow: 0 0 24px rgba(255, 197, 61, .55);
+    transform: skewX(-8deg);
+  }
+
+  .tagline {
+    margin-top: 18px;
+    font-size: clamp(14px, 2vw, 17px);
+    font-weight: 300;
+    color: var(--smoke);
+  }
+  .tagline b { color: var(--chalk); font-weight: 600; }
+
+  /* ---------- đồng hồ đếm ngược ---------- */
+  .count {
+    margin-top: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: clamp(8px, 3vw, 26px);
+  }
+  .unit { min-width: clamp(58px, 14vw, 118px); }
+  .unit .num {
+    font-family: "Anton", "Archivo Black", Impact, sans-serif;
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+    font-size: clamp(44px, 9vw, 92px);
+    line-height: 1;
+    color: var(--chalk);
+  }
+  .unit .num.tick { animation: punch .4s ease; }
+  @keyframes punch {
+    0%   { transform: scale(1.14); opacity: .4; }
+    100% { transform: none; opacity: 1; }
+  }
+  .unit .lbl {
+    margin-top: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--smoke);
+  }
+  .sep {
+    font-family: "Anton", Impact, sans-serif;
+    font-size: clamp(30px, 6vw, 58px);
+    line-height: 1;
+    padding-top: clamp(4px, 1.2vw, 12px);
+    color: var(--gold);
+    animation: blink 1.6s ease-in-out infinite;
+  }
+  @keyframes blink { 50% { opacity: .2; } }
+
+  /* ---------- vạch 100 ngày ---------- */
+  .roundbar { margin: 40px auto 0; max-width: 560px; }
+  .roundbar .track {
+    height: 12px;
+    border-radius: 999px;
+    background: rgba(245, 240, 230, .12);
+    overflow: hidden;
+  }
+  .roundbar .fill {
+    height: 100%;
+    width: 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--red), var(--gold) 55%, var(--blue));
+    transition: width 1.2s ease;
+  }
+  .roundbar .meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--smoke);
+  }
+  .roundbar .meta b { color: var(--gold); }
+
+  .deadline {
+    margin-top: 26px;
+    font-size: clamp(14px, 2vw, 16px);
+    font-weight: 300;
+    color: var(--smoke);
+  }
+  .deadline b { color: var(--chalk); font-weight: 600; }
+
+  /* ---------- hết giờ ---------- */
+  .timeup { display: none; }
+  body.is-timeup .count, body.is-timeup .deadline { display: none; }
+  body.is-timeup .timeup {
+    display: block;
+    margin-top: 38px;
+    font-family: "Anton", Impact, sans-serif;
+    font-size: clamp(30px, 6vw, 60px);
+    color: var(--gold);
+    text-shadow: 0 0 40px rgba(255, 197, 61, .6);
+  }
+
+  @media (max-width: 560px) {
+    .count {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px 12px;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .unit { min-width: 0; }
+    .sep { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sep, .unit .num.tick { animation: none !important; }
+    .fade { animation-duration: .01s; }
+  }
+</style>
+</head>
+<body>
+
+<div class="spot" aria-hidden="true"></div>
+
+<main>
+  <p class="fade d1"><span class="eyebrow">Kèo hít đất · 100 ngày 💪</span></p>
+
+  <div class="versus fade d2">
+    <div class="fighter red">TrungGD<small>Góc đỏ</small></div>
+    <div class="vs">VS</div>
+    <div class="fighter blue">TaiDevops<small>Góc xanh</small></div>
+  </div>
+
+  <p class="tagline fade d3">100 ngày luyện tập — hẹn ngày <b>quyết đấu chống đẩy</b>, ai ngon hơn sẽ rõ.</p>
+
+  <div class="count fade d4" id="count">
+    <div class="unit"><div class="num" id="d">0</div><div class="lbl">Ngày</div></div>
+    <div class="sep">:</div>
+    <div class="unit"><div class="num" id="h">00</div><div class="lbl">Giờ</div></div>
+    <div class="sep">:</div>
+    <div class="unit"><div class="num" id="m">00</div><div class="lbl">Phút</div></div>
+    <div class="sep">:</div>
+    <div class="unit"><div class="num" id="s">00</div><div class="lbl">Giây</div></div>
+  </div>
+
+  <p class="timeup fade d4">🔔 Hết giờ tập — vào kèo, chống đẩy thôi! 💪</p>
+
+  <div class="roundbar fade d5">
+    <div class="track"><div class="fill" id="fill"></div></div>
+    <div class="meta"><span>Bắt đầu 04·08·2026</span><b id="dayNo">Ngày 1/100</b><span>Chốt kèo 12·11·2026</span></div>
+  </div>
+
+  <p class="deadline fade d5">Giờ G: <b>0h00 ngày 12 tháng 11, 2026</b> — còn <b id="nights">…</b> buổi tập nữa, luyện đi kẻo thua 🏋️</p>
+</main>
+
+<script>
+(function () {
+  var START = new Date(2026, 7, 4, 0, 0, 0);   // 04/08/2026
+  var DUE   = new Date(2026, 10, 12, 0, 0, 0); // 12/11/2026 — tròn 100 ngày
+
+  var el = {
+    d: document.getElementById('d'),
+    h: document.getElementById('h'),
+    m: document.getElementById('m'),
+    s: document.getElementById('s'),
+    fill: document.getElementById('fill'),
+    dayNo: document.getElementById('dayNo'),
+    nights: document.getElementById('nights')
+  };
+
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+  function set(node, val) {
+    if (node.textContent !== val) {
+      node.textContent = val;
+      node.classList.remove('tick');
+      void node.offsetWidth;
+      node.classList.add('tick');
+    }
+  }
+
+  function render() {
+    var now = new Date();
+    var diff = DUE - now;
+
+    var p = Math.min(1, Math.max(0, (now - START) / (DUE - START)));
+    el.fill.style.width = (p * 100) + '%';
+    var dayNo = Math.min(100, Math.floor((now - START) / 864e5) + 1);
+    el.dayNo.textContent = 'Ngày ' + Math.max(1, dayNo) + '/100';
+
+    if (diff <= 0) {
+      document.body.classList.add('is-timeup');
+      return;
+    }
+
+    set(el.d, '' + Math.floor(diff / 864e5));
+    set(el.h, pad(Math.floor(diff / 36e5) % 24));
+    set(el.m, pad(Math.floor(diff / 6e4) % 60));
+    set(el.s, pad(Math.floor(diff / 1e3) % 60));
+
+    el.nights.textContent = Math.ceil(diff / 864e5);
+  }
+
+  render();
+  setInterval(render, 1000);
+})();
+</script>
+</body>
+</html>
