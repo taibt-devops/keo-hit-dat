@@ -3,18 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kèo hít đất · TrungGD vs TaiDevops 💪</title>
+<title>Đấu trường hít đất 🩸 TrungGD vs TaiDevops</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Nosifer&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ring:   #0e0e14;
-    --red:    #ff3b47;
-    --blue:   #2d7dff;
-    --gold:   #ffc53d;
-    --chalk:  #f5f0e6;
-    --smoke:  #8b8b9e;
+    --arena:  #0b0608;
+    --blood:  #d91820;
+    --gore:   #8a0f14;
+    --dried:  #5c090d;
+    --bone:   #e8ddca;
+    --steel:  #4f6fae;
+    --steel2: #2d7dff;
+    --ash:    #9b8f92;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,34 +25,74 @@
 
   body {
     font-family: "Be Vietnam Pro", "Segoe UI", system-ui, sans-serif;
-    color: var(--chalk);
+    color: var(--bone);
     background:
-      radial-gradient(60% 80% at 0% 0%,   rgba(255, 59, 71, .28), transparent 60%),
-      radial-gradient(60% 80% at 100% 100%, rgba(45, 125, 255, .28), transparent 60%),
-      radial-gradient(90% 60% at 50% 120%, #16161f 0%, transparent 70%),
-      var(--ring);
+      radial-gradient(75% 55% at 50% 0%, rgba(217, 24, 32, .12), transparent 60%),
+      radial-gradient(55% 75% at 0% 100%, rgba(138, 15, 20, .30), transparent 65%),
+      radial-gradient(55% 75% at 100% 100%, rgba(45, 125, 255, .10), transparent 65%),
+      var(--arena);
     min-height: 100%;
     overflow-x: hidden;
     display: grid;
     place-items: center;
   }
 
-  /* ---------- ánh đèn sàn đấu ---------- */
+  /* ---------- đèn sàn đấu chớp nháy ---------- */
   .spot {
     position: fixed;
     inset: 0;
     pointer-events: none;
     background:
-      conic-gradient(from 200deg at 18% -10%, transparent 0deg, rgba(255, 255, 255, .05) 12deg, transparent 26deg),
-      conic-gradient(from 140deg at 82% -10%, transparent 0deg, rgba(255, 255, 255, .05) 12deg, transparent 26deg);
+      conic-gradient(from 200deg at 15% -10%, transparent 0deg, rgba(255, 220, 220, .06) 12deg, transparent 26deg),
+      conic-gradient(from 140deg at 85% -10%, transparent 0deg, rgba(255, 220, 220, .06) 12deg, transparent 26deg);
+    animation: flicker 7s linear infinite;
+  }
+  @keyframes flicker {
+    0%, 91%, 95%, 100% { opacity: 1; }
+    92%, 94% { opacity: .35; }
+    93% { opacity: .7; }
+  }
+
+  /* ---------- viền tối đấu trường ---------- */
+  .vignette {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(120% 100% at 50% 45%, transparent 50%, rgba(0, 0, 0, .72) 100%);
+  }
+
+  /* ---------- máu chảy từ trần ---------- */
+  .blood-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .blood-top svg { display: block; width: 100%; height: auto; }
+  .droplet { animation: drip 4.5s ease-in infinite; }
+  .droplet.l2 { animation-delay: 2.2s; animation-duration: 5.5s; }
+  @keyframes drip {
+    0%, 55% { transform: translateY(0); opacity: 1; }
+    100%    { transform: translateY(46vh); opacity: 0; }
+  }
+
+  /* ---------- lớp sạn grunge ---------- */
+  .grit {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: .5;
+    mix-blend-mode: overlay;
   }
 
   main {
     position: relative;
     z-index: 1;
     text-align: center;
-    padding: 44px 18px 52px;
-    max-width: 900px;
+    padding: 64px 18px 56px;
+    max-width: 960px;
     width: 100%;
   }
 
@@ -65,37 +107,57 @@
   .eyebrow {
     display: inline-block;
     font-size: 12px;
-    font-weight: 600;
-    letter-spacing: .38em;
+    font-weight: 800;
+    letter-spacing: .34em;
     text-transform: uppercase;
-    color: var(--gold);
-    border: 1px solid rgba(255, 197, 61, .45);
-    padding: 8px 18px 7px 22px;
-    border-radius: 999px;
+    color: var(--bone);
+    background: linear-gradient(180deg, var(--gore), var(--dried));
+    border: 1px solid rgba(217, 24, 32, .55);
+    box-shadow: 0 0 26px rgba(217, 24, 32, .35), inset 0 1px 0 rgba(255, 255, 255, .12);
+    padding: 9px 20px 8px 24px;
+    border-radius: 4px;
+    transform: skewX(-6deg);
   }
 
-  /* ---------- hai võ sĩ ---------- */
+  /* ---------- hai đấu sĩ ---------- */
   .versus {
-    margin-top: 30px;
+    position: relative;
+    margin-top: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: clamp(10px, 3vw, 28px);
+    gap: clamp(14px, 4vw, 44px);
     flex-wrap: wrap;
+  }
+  .splats {
+    position: absolute;
+    inset: -40px -20px;
+    pointer-events: none;
+    z-index: -1;
+    opacity: .85;
   }
   .fighter {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 14px;
-    font-family: "Anton", "Archivo Black", Impact, sans-serif;
-    font-size: clamp(34px, 7.5vw, 84px);
-    line-height: 1;
-    letter-spacing: .02em;
+    gap: 16px;
+    font-family: "Nosifer", "Anton", Impact, sans-serif;
+    font-size: clamp(19px, 3.8vw, 46px);
+    line-height: 1.25;
     text-transform: uppercase;
   }
-  .fighter.red  { color: var(--red);  text-shadow: 0 0 34px rgba(255, 59, 71, .45); }
-  .fighter.blue { color: var(--blue); text-shadow: 0 0 34px rgba(45, 125, 255, .5); }
+  .fighter.red  { color: var(--blood); text-shadow: 0 0 30px rgba(217, 24, 32, .6), 0 2px 0 #3a0507; }
+  .fighter.blue { color: var(--steel2); text-shadow: 0 0 30px rgba(45, 125, 255, .55), 0 2px 0 #071a3a; }
+  .fighter small {
+    display: block;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: clamp(10px, 1.4vw, 13px);
+    font-weight: 800;
+    letter-spacing: .3em;
+    margin-top: 10px;
+    color: var(--ash);
+    text-shadow: none;
+  }
   .avatar {
     width: clamp(96px, 15vw, 150px);
     height: clamp(96px, 15vw, 150px);
@@ -103,35 +165,35 @@
     object-fit: cover;
     border: 3px solid;
     display: block;
+    filter: saturate(.85) contrast(1.1);
   }
-  .fighter.red .avatar  { border-color: var(--red);  box-shadow: 0 0 32px rgba(255, 59, 71, .55); }
-  .fighter.blue .avatar { border-color: var(--blue); box-shadow: 0 0 32px rgba(45, 125, 255, .6); }
-  .fighter small {
-    display: block;
-    font-family: "Be Vietnam Pro", sans-serif;
-    font-size: clamp(10px, 1.4vw, 13px);
-    font-weight: 600;
-    letter-spacing: .3em;
-    margin-top: 8px;
-    color: var(--smoke);
+  .fighter.red .avatar {
+    border-color: var(--blood);
+    box-shadow: 0 0 34px rgba(217, 24, 32, .6), 0 0 0 7px rgba(138, 15, 20, .25);
+  }
+  .fighter.blue .avatar {
+    border-color: var(--steel2);
+    box-shadow: 0 0 34px rgba(45, 125, 255, .55), 0 0 0 7px rgba(45, 125, 255, .18);
   }
   .vs {
-    font-family: "Anton", "Archivo Black", Impact, sans-serif;
-    font-size: clamp(22px, 4vw, 44px);
-    color: var(--gold);
-    text-shadow: 0 0 24px rgba(255, 197, 61, .55);
-    transform: skewX(-8deg);
+    font-family: "Nosifer", Impact, sans-serif;
+    font-size: clamp(20px, 3.4vw, 42px);
+    color: var(--blood);
+    text-shadow: 0 0 26px rgba(217, 24, 32, .75), 0 3px 0 #3a0507;
+    transform: rotate(-6deg);
+    animation: pulse 1.8s ease-in-out infinite;
   }
+  @keyframes pulse { 50% { transform: rotate(-6deg) scale(1.12); } }
 
   .tagline {
-    margin-top: 18px;
+    margin-top: 26px;
     font-size: clamp(14px, 2vw, 17px);
     font-weight: 300;
-    color: var(--smoke);
+    color: var(--ash);
   }
-  .tagline b { color: var(--chalk); font-weight: 600; }
+  .tagline b { color: var(--bone); font-weight: 600; }
 
-  /* ---------- đồng hồ đếm ngược ---------- */
+  /* ---------- đồng hồ tử chiến ---------- */
   .count {
     margin-top: 38px;
     display: flex;
@@ -141,84 +203,105 @@
   }
   .unit { min-width: clamp(58px, 14vw, 118px); }
   .unit .num {
-    font-family: "Anton", "Archivo Black", Impact, sans-serif;
+    font-family: "Anton", Impact, sans-serif;
     font-weight: 400;
     font-variant-numeric: tabular-nums;
     font-size: clamp(44px, 9vw, 92px);
     line-height: 1;
-    color: var(--chalk);
+    color: var(--bone);
+    text-shadow: 0 0 28px rgba(217, 24, 32, .4), 0 4px 0 rgba(0, 0, 0, .55);
   }
   .unit .num.tick { animation: punch .4s ease; }
   @keyframes punch {
-    0%   { transform: scale(1.14); opacity: .4; }
+    0%   { transform: scale(1.16); opacity: .4; }
     100% { transform: none; opacity: 1; }
   }
   .unit .lbl {
     margin-top: 8px;
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 800;
     letter-spacing: .3em;
     text-transform: uppercase;
-    color: var(--smoke);
+    color: var(--ash);
   }
   .sep {
     font-family: "Anton", Impact, sans-serif;
     font-size: clamp(30px, 6vw, 58px);
     line-height: 1;
     padding-top: clamp(4px, 1.2vw, 12px);
-    color: var(--gold);
-    animation: blink 1.6s ease-in-out infinite;
+    color: var(--blood);
+    text-shadow: 0 0 18px rgba(217, 24, 32, .7);
+    animation: blink 1.2s ease-in-out infinite;
   }
-  @keyframes blink { 50% { opacity: .2; } }
+  @keyframes blink { 50% { opacity: .15; } }
 
-  /* ---------- vạch 100 ngày ---------- */
-  .roundbar { margin: 40px auto 0; max-width: 560px; }
-  .roundbar .track {
-    height: 12px;
-    border-radius: 999px;
-    background: rgba(245, 240, 230, .12);
+  /* ---------- thanh máu 100 ngày ---------- */
+  .hpbar { margin: 44px auto 0; max-width: 600px; }
+  .hpbar .frame {
+    position: relative;
+    height: 20px;
+    border: 2px solid rgba(232, 221, 202, .35);
+    border-radius: 3px;
+    background: rgba(0, 0, 0, .55);
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, .8), 0 0 22px rgba(217, 24, 32, .25);
     overflow: hidden;
+    transform: skewX(-12deg);
   }
-  .roundbar .fill {
+  .hpbar .fill {
     height: 100%;
     width: 0;
-    border-radius: 999px;
-    background: linear-gradient(90deg, var(--red), var(--gold) 55%, var(--blue));
+    background: linear-gradient(180deg, #ff4b52 0%, var(--blood) 45%, var(--gore) 100%);
+    box-shadow: 0 0 16px rgba(217, 24, 32, .8);
     transition: width 1.2s ease;
   }
-  .roundbar .meta {
+  .hpbar .frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(90deg, transparent 0 28px, rgba(0, 0, 0, .45) 28px 30px);
+    pointer-events: none;
+  }
+  .hpbar .meta {
     display: flex;
     justify-content: space-between;
-    margin-top: 10px;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
     font-size: 12px;
-    font-weight: 600;
-    letter-spacing: .18em;
+    font-weight: 800;
+    letter-spacing: .16em;
     text-transform: uppercase;
-    color: var(--smoke);
+    color: var(--ash);
   }
-  .roundbar .meta b { color: var(--gold); }
+  .hpbar .meta b {
+    color: var(--blood);
+    text-shadow: 0 0 14px rgba(217, 24, 32, .6);
+  }
 
   .deadline {
-    margin-top: 26px;
+    margin-top: 28px;
     font-size: clamp(14px, 2vw, 16px);
     font-weight: 300;
-    color: var(--smoke);
+    color: var(--ash);
   }
-  .deadline b { color: var(--chalk); font-weight: 600; }
+  .deadline b { color: var(--bone); font-weight: 600; }
+  .deadline .blood-word { color: var(--blood); font-weight: 800; }
 
   /* ---------- hết giờ ---------- */
   .timeup { display: none; }
   body.is-timeup .count, body.is-timeup .deadline { display: none; }
   body.is-timeup .timeup {
     display: block;
-    margin-top: 38px;
-    font-family: "Anton", Impact, sans-serif;
-    font-size: clamp(30px, 6vw, 60px);
-    color: var(--gold);
-    text-shadow: 0 0 40px rgba(255, 197, 61, .6);
+    margin-top: 40px;
+    font-family: "Nosifer", Impact, sans-serif;
+    font-size: clamp(24px, 5vw, 52px);
+    color: var(--blood);
+    text-shadow: 0 0 44px rgba(217, 24, 32, .8), 0 4px 0 #3a0507;
   }
 
   @media (max-width: 560px) {
+    .versus { flex-direction: column; gap: 8px; }
+    .vs { margin: 6px 0; }
     .count {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -229,10 +312,11 @@
     }
     .unit { min-width: 0; }
     .sep { display: none; }
+    .hpbar .frame { transform: none; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .sep, .unit .num.tick { animation: none !important; }
+    .spot, .droplet, .vs, .sep, .unit .num.tick { animation: none !important; }
     .fade { animation-duration: .01s; }
   }
 </style>
@@ -240,17 +324,89 @@
 <body>
 
 <div class="spot" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<div class="blood-top" aria-hidden="true">
+  <svg viewBox="0 0 1200 190" preserveAspectRatio="none">
+    <g fill="#6d0a10">
+      <rect x="0" y="0" width="1200" height="30"/>
+      <rect x="55"  y="0" width="15" height="82"  rx="8"/>
+      <rect x="215" y="0" width="13" height="104" rx="7"/>
+      <rect x="395" y="0" width="16" height="132" rx="8"/>
+      <rect x="575" y="0" width="12" height="72"  rx="6"/>
+      <rect x="742" y="0" width="15" height="118" rx="8"/>
+      <rect x="930" y="0" width="13" height="90"  rx="7"/>
+      <rect x="1108" y="0" width="15" height="140" rx="8"/>
+    </g>
+    <g fill="#a3121a">
+      <rect x="0" y="0" width="1200" height="22"/>
+      <rect x="40"  y="0" width="14" height="66"  rx="7"/>
+      <rect x="120" y="0" width="10" height="40"  rx="5"/>
+      <rect x="200" y="0" width="15" height="92"  rx="8"/>
+      <rect x="298" y="0" width="11" height="52"  rx="6"/>
+      <rect x="382" y="0" width="16" height="120" rx="8"/>
+      <rect x="468" y="0" width="12" height="62"  rx="6"/>
+      <rect x="558" y="0" width="10" height="38"  rx="5"/>
+      <rect x="640" y="0" width="15" height="98"  rx="8"/>
+      <rect x="728" y="0" width="12" height="58"  rx="6"/>
+      <rect x="818" y="0" width="17" height="146" rx="9"/>
+      <rect x="908" y="0" width="12" height="74"  rx="6"/>
+      <rect x="998" y="0" width="11" height="48"  rx="6"/>
+      <rect x="1086" y="0" width="15" height="108" rx="8"/>
+      <rect x="1162" y="0" width="11" height="64"  rx="6"/>
+    </g>
+    <circle class="droplet" cx="390" cy="130" r="6" fill="#a3121a"/>
+    <circle class="droplet l2" cx="826" cy="156" r="7" fill="#a3121a"/>
+  </svg>
+</div>
+
+<svg class="grit" aria-hidden="true">
+  <filter id="noise">
+    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+    <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0.6 0.6 0.6 0 0"/>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#noise)" opacity=".18"/>
+</svg>
 
 <main>
-  <p class="fade d1"><span class="eyebrow">Kèo hít đất · 100 ngày 💪</span></p>
+  <p class="fade d1"><span class="eyebrow">⚔️ Đấu trường hít đất · Kèo sinh tử 100 ngày</span></p>
 
   <div class="versus fade d2">
-    <div class="fighter red"><img class="avatar" src="images/trunggd.jpg" alt="TrungGD"><span>TrungGD<small>Góc đỏ</small></span></div>
+    <svg class="splats" viewBox="0 0 900 300" preserveAspectRatio="none" aria-hidden="true">
+      <g fill="#8a0f14" opacity=".32">
+        <ellipse cx="140" cy="150" rx="95" ry="55" transform="rotate(-14 140 150)"/>
+        <ellipse cx="190" cy="120" rx="60" ry="38" transform="rotate(28 190 120)"/>
+        <ellipse cx="110" cy="190" rx="55" ry="30" transform="rotate(10 110 190)"/>
+        <ellipse cx="240" cy="180" rx="30" ry="14" transform="rotate(-32 240 180)"/>
+        <circle cx="60"  cy="82"  r="10"/>
+        <circle cx="290" cy="215" r="13"/>
+        <circle cx="35"  cy="215" r="7"/>
+        <circle cx="252" cy="60"  r="6"/>
+      </g>
+      <g fill="#3d5584" opacity=".22">
+        <ellipse cx="760" cy="150" rx="95" ry="55" transform="rotate(14 760 150)"/>
+        <ellipse cx="705" cy="115" rx="58" ry="36" transform="rotate(-26 705 115)"/>
+        <ellipse cx="800" cy="195" rx="52" ry="28" transform="rotate(-8 800 195)"/>
+        <circle cx="850" cy="80"  r="10"/>
+        <circle cx="620" cy="220" r="12"/>
+        <circle cx="868" cy="232" r="7"/>
+      </g>
+      <g fill="#a3121a" opacity=".8">
+        <ellipse cx="450" cy="150" rx="58" ry="44"/>
+        <circle cx="518" cy="98"  r="9"/>
+        <circle cx="386" cy="96"  r="7"/>
+        <circle cx="528" cy="205" r="8"/>
+        <circle cx="378" cy="210" r="10"/>
+        <circle cx="450" cy="52"  r="6"/>
+        <circle cx="452" cy="252" r="7"/>
+      </g>
+    </svg>
+    <div class="fighter red"><img class="avatar" src="images/trunggd.jpg" alt="TrungGD"><span>TrungGD<small>Góc đỏ · Khát máu</small></span></div>
     <div class="vs">VS</div>
-    <div class="fighter blue"><img class="avatar" src="images/taidevops.jpg" alt="TaiDevops"><span>TaiDevops<small>Góc xanh</small></span></div>
+    <div class="fighter blue"><img class="avatar" src="images/taidevops.jpg" alt="TaiDevops"><span>TaiDevops<small>Góc xanh · Lạnh lùng</small></span></div>
   </div>
 
-  <p class="tagline fade d3">100 ngày luyện tập — hẹn ngày <b>quyết đấu chống đẩy</b>, ai ngon hơn sẽ rõ.</p>
+  <p class="tagline fade d3">100 ngày mài cơ chờ ngày <b>tử chiến chống đẩy</b> — kẻ thắng ngẩng cao đầu, kẻ thua gục trên vũng… mồ hôi 💀</p>
 
   <div class="count fade d4" id="count">
     <div class="unit"><div class="num" id="d">0</div><div class="lbl">Ngày</div></div>
@@ -262,14 +418,14 @@
     <div class="unit"><div class="num" id="s">00</div><div class="lbl">Giây</div></div>
   </div>
 
-  <p class="timeup fade d4">🔔 Hết giờ tập — vào kèo, chống đẩy thôi! 💪</p>
+  <p class="timeup fade d4">🩸 FIGHT! Chống đẩy tới bến! 💀</p>
 
-  <div class="roundbar fade d5">
-    <div class="track"><div class="fill" id="fill"></div></div>
-    <div class="meta"><span>Bắt đầu 04·08·2026</span><b id="dayNo">Ngày 1/100</b><span>Chốt kèo 12·11·2026</span></div>
+  <div class="hpbar fade d5">
+    <div class="frame"><div class="fill" id="fill"></div></div>
+    <div class="meta"><span>Khai chiến 04·08·2026</span><b id="dayNo">Ngày 1/100</b><span>Tử chiến 12·11·2026</span></div>
   </div>
 
-  <p class="deadline fade d5">Giờ G: <b>0h00 ngày 12 tháng 11, 2026</b> — còn <b id="nights">…</b> buổi tập nữa, luyện đi kẻo thua 🏋️</p>
+  <p class="deadline fade d5">Giờ G: <b>0h00 ngày 12 tháng 11, 2026</b> — còn <b id="nights">…</b> đêm mài giũa, <span class="blood-word">máu lửa lên</span> 🩸</p>
 </main>
 
 <script>
