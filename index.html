@@ -298,6 +298,37 @@
   .deadline b { color: var(--bone); font-weight: 600; }
   .deadline .blood-word { color: var(--blood); font-weight: 800; }
 
+  /* ---------- khu cà khịa ---------- */
+  .comments {
+    margin: 70px auto 0;
+    max-width: 780px;
+  }
+  .comments::before {
+    content: "";
+    display: block;
+    height: 2px;
+    margin: 0 auto 36px;
+    max-width: 430px;
+    background: linear-gradient(90deg, transparent, var(--gore) 30%, var(--blood) 50%, var(--gore) 70%, transparent);
+    box-shadow: 0 0 14px rgba(217, 24, 32, .5);
+  }
+  .comments h2 {
+    font-family: "Anton", Impact, sans-serif;
+    font-weight: 400;
+    font-size: clamp(22px, 3.4vw, 34px);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--blood);
+    text-shadow: 0 0 22px rgba(217, 24, 32, .5), 0 2px 0 rgba(0, 0, 0, .6);
+  }
+  .comments .hint {
+    margin: 10px 0 26px;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ash);
+  }
+  .comments .hint b { color: var(--bone); font-weight: 600; }
+
   /* ---------- hết giờ ---------- */
   .timeup { display: none; }
   body.is-timeup .count, body.is-timeup .deadline { display: none; }
@@ -437,7 +468,29 @@
   </div>
 
   <p class="deadline fade d5">Giờ G: <b>0h00 ngày 12 tháng 11, 2026</b> — còn <b id="nights">…</b> đêm mài giũa, <span class="blood-word">máu lửa lên</span> 🩸</p>
+
+  <section class="comments fade d5">
+    <h2>🗣️ Khu cà khịa</h2>
+    <p class="hint">Đặt cửa đi anh em — ai <b>kèo trên</b>, ai <b>kèo dưới</b>? Đăng nhập GitHub rồi chém thoải mái.</p>
+    <div class="giscus"></div>
+  </section>
 </main>
+
+<script src="https://giscus.app/client.js"
+        data-repo="taibt-devops/keo-hit-dat"
+        data-repo-id="R_kgDOTtMAYA"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOTtMAYM4DCnyg"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="transparent_dark"
+        data-lang="vi"
+        crossorigin="anonymous"
+        async>
+</script>
 
 <script>
 (function () {
