@@ -68,9 +68,9 @@
     left: 0;
     width: 100%;
     pointer-events: none;
-    z-index: 2;
+    z-index: 0;
   }
-  .blood-top svg { display: block; width: 100%; height: auto; }
+  .blood-top svg { display: block; width: 100%; height: clamp(90px, 13vw, 160px); }
   .droplet { animation: drip 4.5s ease-in infinite; }
   .droplet.l2 { animation-delay: 2.2s; animation-duration: 5.5s; }
   @keyframes drip {
@@ -91,7 +91,7 @@
     position: relative;
     z-index: 1;
     text-align: center;
-    padding: 64px 18px 56px;
+    padding: clamp(90px, 12vw, 150px) 18px 56px;
     max-width: 960px;
     width: 100%;
   }
