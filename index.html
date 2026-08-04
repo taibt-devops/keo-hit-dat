@@ -84,6 +84,10 @@
     flex-wrap: wrap;
   }
   .fighter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
     font-family: "Anton", "Archivo Black", Impact, sans-serif;
     font-size: clamp(34px, 7.5vw, 84px);
     line-height: 1;
@@ -92,6 +96,16 @@
   }
   .fighter.red  { color: var(--red);  text-shadow: 0 0 34px rgba(255, 59, 71, .45); }
   .fighter.blue { color: var(--blue); text-shadow: 0 0 34px rgba(45, 125, 255, .5); }
+  .avatar {
+    width: clamp(96px, 15vw, 150px);
+    height: clamp(96px, 15vw, 150px);
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid;
+    display: block;
+  }
+  .fighter.red .avatar  { border-color: var(--red);  box-shadow: 0 0 32px rgba(255, 59, 71, .55); }
+  .fighter.blue .avatar { border-color: var(--blue); box-shadow: 0 0 32px rgba(45, 125, 255, .6); }
   .fighter small {
     display: block;
     font-family: "Be Vietnam Pro", sans-serif;
@@ -231,9 +245,9 @@
   <p class="fade d1"><span class="eyebrow">Kèo hít đất · 100 ngày 💪</span></p>
 
   <div class="versus fade d2">
-    <div class="fighter red">TrungGD<small>Góc đỏ</small></div>
+    <div class="fighter red"><img class="avatar" src="images/trunggd.jpg" alt="TrungGD"><span>TrungGD<small>Góc đỏ</small></span></div>
     <div class="vs">VS</div>
-    <div class="fighter blue">TaiDevops<small>Góc xanh</small></div>
+    <div class="fighter blue"><img class="avatar" src="images/taidevops.jpg" alt="TaiDevops"><span>TaiDevops<small>Góc xanh</small></span></div>
   </div>
 
   <p class="tagline fade d3">100 ngày luyện tập — hẹn ngày <b>quyết đấu chống đẩy</b>, ai ngon hơn sẽ rõ.</p>
